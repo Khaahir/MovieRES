@@ -36,20 +36,20 @@ router.get("/:_id", async (req,res)=>{
 router.get("/rating/:_id", async (req, res) => {
   try {
     const reviewId = req.params._id;
-    console.log("Review ID:", reviewId);
+   
 
     if (!reviewId) {
       return res.status(400).json({ message: "No Id was provided" });
     }
 
-    const findReview = await reviewModel.findById(reviewId);
+    const findReview = await reviewModel.findById(reviewId).populate("movieId");
 
     if (!findReview) {
       return res.status(404).json({ message: "Review not found" });
     }
 
     return res.status(200).json({
-      message: `This is the rating: ${findReview.rating} `,
+      message: `This is the rating: ${findReview.rating} ${findReview.movieId.title} `,
     });
   } catch (error) {
     console.error("Error fetching review:", error);
