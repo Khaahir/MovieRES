@@ -1,0 +1,53 @@
+# MovieRef API Documentation
+
+
+## Endpoints
+
+### Users
+- **POST /users/signup** - Register new user  
+  `{"username":"jeppe123","password":"hejhej123"}`
+
+- **POST /users/login** - Login  
+  `{"username":"jeppe123","password":"hejhej123"}`
+
+- **GET /users** - List all users *(Requires auth)*
+
+- **POST /users/banuser/:userId** - Ban user *(Requires auth)*  
+  Example: `/users/banuser/682ee819cbc9d85bd4ec3f4f`
+
+- **POST /users/makeadmin/:userId** - Make user admin *(Requires auth)*  
+  Example: `/users/makeadmin/682f5b4d13e083aacefadc6f`
+
+### Movies
+- **GET /movies** - Get all movies
+- **GET /movies/:movieId** - Get specific movie  
+  Example: `/movies/682b0bfdd2856115232d0fd1`
+
+- **POST /movies** - Add movie *(Requires auth)*  
+  `{"title":"Inception","director":"Christopher Nolan","releseYear":2010,"gener":"Sci-Fi"}`
+
+- **PUT /movies/:movieId** - Update movie *(Requires auth)*  
+  Example: `/movies/682b0bfdd2856115232d0fd1`  
+  `{"gener":"komedi"}`
+
+- **DELETE /movies/:movieId** - Delete movie *(Requires auth)*  
+  Example: `/movies/682b0bfdd2856115232d0fd1`
+
+### Reviews
+- **GET /reviews** - Get all reviews
+- **GET /movies/:movieId/reviews** - Get reviews for movie  
+  Example: `/movies/682b0bfdd2856115232d0fd1/reviews`
+
+- **GET /reviews/:reviewId** - Get specific review  
+  Example: `/reviews/682b64ea2439a13879caee21`
+
+- **POST /movies/:movieId/reviews** - Create review *(Requires auth)*  
+  Example: `/movies/682b0bfdd2856115232d0fd1/reviews`  
+  `{"userId":"682ae335c15de74994cbee5c","rating":10,"comment":"really good movie"}`
+
+- **PUT /reviews/:reviewId** - Update review *(Requires auth)*  
+  Example: `/reviews/682b471f93454787be6ac379`  
+  `{"rating":5}`
+
+- **DELETE /reviews/:reviewId** - Delete review *(Requires auth)*  
+  Example: `/reviews/682b471f93454787be6ac379`
