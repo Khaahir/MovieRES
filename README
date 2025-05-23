@@ -1,0 +1,116 @@
+# 🎬 Movie Review API
+
+En komplett backend för en webbapplikation där användare kan registrera sig, logga in och lämna recensioner på filmer. Administratörer kan dessutom hantera användare genom att ge admin-rättigheter, banna konton, och ta bort användare.
+
+Byggt med **Node.js**, **Express**, **MongoDB** och **Mongoose**.
+
+---
+
+## 📦 Funktionalitet
+
+- 🧑 Användarregistrering & inloggning med säkra lösenord (bcrypt + JWT)
+- ✍️ Användare kan lämna recensioner på filmer
+- 🎥 CRUD för filmer
+- ⭐ CRUD för recensioner
+- 🔐 Roll-baserad autentisering (Admin/Användare)
+- 🛡️ Adminfunktioner: ge admin-rättigheter, banna användare, ta bort konton
+
+---
+
+## 🧩 Mongoose-modeller
+
+### `User`
+| Fält      | Typ     | Beskrivning                    |
+|-----------|---------|--------------------------------|
+| username  | String  | Användarnamn                   |
+| email     | String  | E-postadress                   |
+| password  | String  | Hashed lösenord                |
+| role      | String  | "User" eller "Admin" (default) |
+| status    | String  | pending, active, banned        |
+
+---
+
+### `Movie`
+| Fält         | Typ    | Beskrivning          |
+|--------------|--------|----------------------|
+| title        | String | Filmtitel            |
+| director     | String | Regissör             |
+| releaseYear  | Number | Utgivningsår         |
+| genre        | String | Genre                |
+
+---
+
+### `Review`
+| Fält     | Typ      | Beskrivning                            |
+|----------|----------|----------------------------------------|
+| movieId  | ObjectId | Referens till en `Movie`               |
+| userId   | ObjectId | Referens till en `User`                |
+| rating   | Number   | Betyg (1–5)                            |
+| comment  | String   | Recensionstext                         |
+| createdAt| Date     | Skapad datum (automatiskt genererat)   |
+
+---
+
+## 🧪 API-endpoints
+
+### 🔐 Autentisering
+| Metod | Endpoint      | Beskrivning                    |
+|-------|---------------|---------------------------------|
+| POST  | `/register`   | Registrera en ny användare     |
+| POST  | `/login`      | Logga in och få en JWT-token   |
+
+---
+
+### 🎬 Filmer
+| Metod | Endpoint            | Beskrivning                      |
+|-------|---------------------|----------------------------------|
+| POST  | `/movies`           | Lägg till en ny film             |
+| GET   | `/movies`           | Hämta alla filmer                |
+| GET   | `/movies/:id`       | Hämta en specifik film           |
+| PUT   | `/movies/:id`       | Uppdatera en specifik film       |
+| DELETE| `/movies/:id`       | Ta bort en specifik film         |
+| GET   | `/movies/:id/reviews` | Hämta alla recensioner för en film |
+
+---
+
+### ✍️ Recensioner
+| Metod | Endpoint        | Beskrivning                      |
+|-------|-----------------|----------------------------------|
+| POST  | `/reviews`      | Lägg till en recension           |
+| GET   | `/reviews`      | Hämta alla recensioner           |
+| GET   | `/reviews/:id`  | Hämta en specifik recension      |
+| PUT   | `/reviews/:id`  | Uppdatera en specifik recension  |
+| DELETE| `/reviews/:id`  | Ta bort en specifik recension    |
+
+---
+
+### 👑 Adminfunktioner
+| Metod | Endpoint             | Behörighet | Beskrivning                        |
+|-------|----------------------|------------|------------------------------------|
+| POST  | `/banuser/:_id`      | Admin      | Banna en användare                 |
+| POST  | `/makeadmin/:id`     | Admin      | Ge en användare admin-rättigheter  |
+| DELETE| `/deleteuser/:id`    | Admin      | Ta bort en användare permanent     |
+
+---
+
+## 🛡️ Säkerhet
+
+- Hashning med `bcrypt` för lösenord
+- JWT-token för autentisering
+- Middleware för att skydda admin-only endpoints
+- Statushantering av konton (pending, active, banned)
+
+---
+
+## ⚙️ Teknologier
+
+- **Node.js** + **Express**
+- **MongoDB** + **Mongoose**
+- **JWT** för autentisering
+- **bcrypt** för lösenord
+- **dotenv** för miljövariabler
+
+---
+
+## 📁 Mappstruktur (förslag)
+

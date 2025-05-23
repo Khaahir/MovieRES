@@ -37,7 +37,7 @@ router.post("/signup", async (req,res)=>{
     })
 
  } catch (error) {
-    res.status(500).json({message:"nu blev det något tokigt här",error:error.message})
+    res.status(500).json({message:"Something went wrong here",error:error.message})
  }
 
 })
@@ -58,7 +58,7 @@ try {
 
     if(findUser.status === "pending"){
         await userModel.updateOne(
-           { _id: findUser._id},
+           { _id: req.params._id},
            {$set: {status: "active"}}
         )
     }
@@ -126,7 +126,6 @@ try {
 })
 router.post("/makeadmin/:id", authUser, authAdmin, async (req, res) => {
   try {
-    console.log("Inloggad användare:", req.user);
 
     const userToUpdate = await userModel.findById(req.params.id);
 
@@ -149,4 +148,27 @@ router.post("/makeadmin/:id", authUser, authAdmin, async (req, res) => {
 });
 
 
+router.delete("/:_id",authUser,authAdmin,async(req,res)=>{
+  const userId = req.params._id
+  console.log(userId)
+  if(!userId){
+    return res.status(400).json({message:"No id was provided"})
+  }
+  try {
+    const findUser = await userModel.findByIdAndDelete(userId)
+
+    if(!findUser){
+      return res.status(400).json({sucess:false,
+        message:"No user with this ID"})
+    }
+    res.status(200).json({sucess:true, message:`User ${findUser.username} is now deleted`})
+  } catch (error) {
+        console.error("🔥 SERVERFEL:", error);
+    res.status(500).json({
+      message: "Serverfel",
+      error: error.message,
+      stack: error.stack
+    });
+  }
+} )
 export default router
