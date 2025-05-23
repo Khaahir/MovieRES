@@ -110,7 +110,3 @@ Byggt med **Node.js**, **Express**, **MongoDB** och **Mongoose**.
 - **bcrypt** för lösenord
 - **dotenv** för miljövariabler
 
----
-
-## 📁 Mappstruktur (förslag)
-
