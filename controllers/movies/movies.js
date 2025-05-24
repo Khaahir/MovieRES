@@ -5,7 +5,7 @@ import reviewModel from "../../models/reviewSchema.js"
 import authUser from "../../middlewares/authUser.js"
 const router = express.Router()
 import adminAuth from "../../middlewares/adminAuth.js"
-
+import movieValidator from "../../Validator/movieValidator.js"
 
 router.get("/", authUser, async (req ,res)=>{
 try {
@@ -26,12 +26,10 @@ try {
 
 
 
-router.post("/", authUser,adminAuth , async (req,res) =>{
+router.post("/",movieValidator, authUser,adminAuth, async (req,res) =>{
     const {title, director ,releseYear, gener } = req.body
     try {
-        if(!title || !director || !releseYear ||!gener){
-            return res.status(400).json({message:"You have to provide with a Title, Director, RealeseYear, and Gener"})
-        }
+
 
         const findAnyCopy = await movieModel.findOne({title})
         

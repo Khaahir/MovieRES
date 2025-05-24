@@ -4,6 +4,8 @@ import userModel from "../../models/userSchema.js"
 import reviewModel from "../../models/reviewSchema.js"
 const router = express.Router()
 
+
+
 router.get("/", async (req,res)=>{
   try{
 
@@ -85,7 +87,7 @@ router.get('/movies/:id/', async (req, res) => {
 });
 
 
-router.post("/movies/:id", async (req, res) => {
+router.post("/movies/:id" , async (req, res) => {
     const movieId = req.params.id;
     const { userId, rating, comment } = req.body;
     

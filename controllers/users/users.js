@@ -150,7 +150,6 @@ router.post("/makeadmin/:id", authUser, authAdmin, async (req, res) => {
 
 router.delete("/:_id",authUser,authAdmin,async(req,res)=>{
   const userId = req.params._id
-  console.log(userId)
   if(!userId){
     return res.status(400).json({message:"No id was provided"})
   }
