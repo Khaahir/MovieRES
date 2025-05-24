@@ -19,3 +19,5 @@ const result = check(req.body)
     return res.status(400).json({message:"The validator stopped the procces",error:result})
  }
 }
+
+export default userValidator

@@ -2,6 +2,7 @@ import express from "express"
 import movieModel from "../../models/movieschema.js"
 import userModel from "../../models/userSchema.js"
 import reviewModel from "../../models/reviewSchema.js"
+import reviewValidator from "../../Validator/reviewValidator.js"
 const router = express.Router()
 
 
@@ -87,7 +88,7 @@ router.get('/movies/:id/', async (req, res) => {
 });
 
 
-router.post("/movies/:id" , async (req, res) => {
+router.post("/movies/:id", reviewValidator , async (req, res) => {
     const movieId = req.params.id;
     const { userId, rating, comment } = req.body;
     

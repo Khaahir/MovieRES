@@ -4,6 +4,7 @@ import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
 import authUser from "../../middlewares/authUser.js"
 import authAdmin from "../../middlewares/adminAuth.js"
+import userValidator from "../../Validator/userValidator.js"
 
 const router = express.Router()
 
@@ -13,13 +14,10 @@ router.get("/", async (req, res) => {
 });
 
 
-router.post("/signup", async (req,res)=>{
+router.post("/signup", userValidator, async (req,res)=>{
  const{username, password ,email}= req.body
  try {
-    if(!username || !password || !email){
-        return res.status(400).json({message: "You need to provide a username an password and a Email"})
-    }
-
+  
     const CheckUsername = await userModel.findOne({username})
     if(CheckUsername){
         return res.status(401).json({Message: "username is already taken try another one"})
