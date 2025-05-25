@@ -189,5 +189,4 @@ router.delete("/reviews/:_id" ,async (req,res)=>{
   }
 })
 
-// router.delete("/:id",)
 export default router
