@@ -1,0 +1,5 @@
+PORT =5050
+
+BASE_URL = "mongodb+srv://"your mongodb username":"your password"@cluster0.sblr0fa.mongodb.net/MoviesRef"
+
+SECRET_KEY = make up a secret key ex ghfjtfg4jhfgfcf
