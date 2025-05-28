@@ -31,7 +31,7 @@ router.post("/signup", userValidator, async (req,res)=>{
     await newuser.save()
 
      return res.status(201).json({sucess: true,
-        message:`Welcome ${ newuser.username} with Let´s review some movies `
+        message:`Welcome ${ newuser.username}  Let´s review some movies `
     })
 
  } catch (error) {
