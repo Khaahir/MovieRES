@@ -56,7 +56,7 @@ try {
 
     if(findUser.status === "pending"){
         await userModel.updateOne(
-           { _id: req.params._id},
+           { _id: findUser._id},
            {$set: {status: "active"}}
         )
     }
@@ -106,10 +106,8 @@ try {
         return res.status(400).json({message:"Could not find that id"})
     }
 
-    await userModel.updateOne(
-       { status: { $in: ["pending", "active"] } },
-        {$set:{ status:"banned"}}
-    )
+    findUser.status = "banned"
+    await findUser.save()
 
     res.status(200).json(`this user is now banned ${findUser.username}`)
 

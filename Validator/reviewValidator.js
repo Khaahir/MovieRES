@@ -3,7 +3,7 @@ import Validator  from "fastest-validator";
 const v = new Validator()
 
 const schema ={
-    userId: {type:"number"},
+    userId: {type:"string"},
     rating:{type:"number"},
     comment:{type:"string"}
 }

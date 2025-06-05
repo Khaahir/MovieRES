@@ -64,8 +64,8 @@ router.get("/rating/:_id", async (req, res) => {
 
 
 
-router.get('/movies/:id/', async (req, res) => {
-  const movieId = req.params.id;
+router.get("/movies/:_id", async (req, res) => {
+  const movieId = req.params._id;
 
   try {
     const reviews = await reviewModel.find({ movieId })
@@ -88,8 +88,8 @@ router.get('/movies/:id/', async (req, res) => {
 });
 
 
-router.post("/movies/:id", reviewValidator , async (req, res) => {
-    const movieId = req.params.id;
+router.post("/movies/:_id", reviewValidator , async (req, res) => {
+    const movieId = req.params._id;
     const { userId, rating, comment } = req.body;
     
     try {
@@ -167,7 +167,7 @@ router.put("/:_id",async (req,res)=>{
   }
 })
 
-router.delete("/reviews/:_id" ,async (req,res)=>{
+router.delete("/:_id" ,async (req,res)=>{
   try {
     const reviewId = await reviewModel.findByIdAndDelete(req.params._id)
     
